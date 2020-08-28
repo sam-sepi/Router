@@ -15,34 +15,40 @@ class Response
     }
 
     /**
-     * @setMethodsAllowed
+     * @fn http methods allowed
      *
-     * @param string $method
-     * @return void
+     * @return boolean
      */
-    public static function setMethodsAllowed()
+    public static function setMethodsAllowed(): bool
     {
         if(!in_array(Request::getMethod(), $this->methodsAllowed))
+        {
+            return false;
+        }
+    }
+
+    /**
+     * @fn getContent
+     *
+     * @return void
+     */
+    public function getContent()
+    {
+        if($this->setMethodsAllowed == false)
         {
             ob_start();
                 HttpStatus::getHttpHeader(405);
                 echo $this->render(Config::HOST . 'Router/views/405.html');
             return ob_get_clean();
         }
+        else
+        {
+            echo $this->render(Config::HOST . $this->route, $this->params);
+        }
     }
 
     /**
-     * Undocumented function
-     *
-     * @return void
-     */
-    public function getContent()
-    {
-        echo $this->render(Config::HOST . $this->route, $this->params);
-    }
-
-    /**
-     * Undocumented function
+     * @fn render
      *
      * @param string $path
      * @return void
