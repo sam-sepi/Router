@@ -4,53 +4,68 @@ namespace Router;
 
 class Router
 {
-    //http methods allowed
-    protected $methodAllowed = ['get', 'post'];
-
-    //route
+    /**
+     * route
+     *
+     * @var string
+     */
     protected $route;
 
-    //callable fn
+    /**
+     * routes allowed
+     *
+     * @var array
+     */
+    public static $routesAllowed = ['post', 'article'];
+
+    /**
+     * callable fn.
+     *
+     * @var fn
+     */
     protected $callback;
 
-    public function __construct(string $route, callable $callback)
+    /**
+     * query params
+     *
+     * @var array
+     */
+    protected $params = [];
+
+    /**
+     * __construct
+     *
+     * @param callable $callback
+     * @param string $route
+     */
+    public function __construct(array $route, callable $callback)
     {
-        $this->route = $route;
+        $this->route = $this->setRoute($route);
+        $this->params = $this->setQueryParams();
         $this->callback = $callback;
     }
     
     /**
-     * @fn methodAllowed
+     * @fn setRoute
      *
-     * @return void
+     * @param string $route
+     * @return string
      */
-    public function methodAllowed()
+    public function setRoute(array $route): string
     {
-        if(!in_array(Request::getMethod(), $this->methodAllowed))
-        {
-            header("HTTP/1.1 405 Method Not Allowed", true, 405);
-            exit();
-        }
+        $routes = explode('/', $route['path']);
+        array_shift($routes);
+        return (in_array(end($routes), self::$routesAllowed)) ? end($routes) : Config::MAIN_PAGE;
     }
 
     /**
-     * @fn getSanitizedParams
+     * @fn setQueryParams
      *
      * @return array
      */
-    public function getSanitizedParams(): array
+    public function setQueryParams(): array
     {
         return Request::getSanitizedArrayParams();
-    }
-
-    /**
-     * @fn isAjax
-     *
-     * @return boolean
-     */
-    public function isAjax():bool
-    {
-        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
     }
 
     /**
@@ -58,6 +73,6 @@ class Router
      */
     public function __destruct()
     {
-        call_user_func($this->callback, $this->route);
+        call_user_func($this->callback, $this->route, $this->params);
     }
 }
