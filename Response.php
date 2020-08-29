@@ -19,12 +19,14 @@ class Response
      *
      * @return boolean
      */
-    public static function setMethodsAllowed(): bool
+    public function setMethodsAllowed(): bool
     {
         if(!in_array(Request::getMethod(), $this->methodsAllowed))
         {
             return false;
         }
+
+        return true;
     }
 
     /**
@@ -34,7 +36,7 @@ class Response
      */
     public function getContent()
     {
-        if($this->setMethodsAllowed == false)
+        if($this->setMethodsAllowed() == false)
         {
             ob_start();
                 HttpStatus::getHttpHeader(405);
@@ -65,6 +67,6 @@ class Response
             
             return ob_get_clean();
         } 
-        else throw new InvalidArgumentException('File not found');
+        else throw new InvalidArgumentException($path);
     }
 }

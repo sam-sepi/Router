@@ -12,13 +12,6 @@ class Router
     protected $route;
 
     /**
-     * routes allowed
-     *
-     * @var array
-     */
-    public static $routesAllowed = ['post', 'article'];
-
-    /**
      * callable fn.
      *
      * @var fn
@@ -55,7 +48,7 @@ class Router
     {
         $routes = explode('/', $route['path']);
         array_shift($routes);
-        return (in_array(end($routes), self::$routesAllowed)) ? end($routes) : Config::MAIN_PAGE;
+        return (array_key_exists(end($routes), Config::ROUTES_ALLOWED)) ? Config::ROUTES_ALLOWED[end($routes)] : Config::MAIN_PAGE;
     }
 
     /**

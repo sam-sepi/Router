@@ -32,8 +32,8 @@ class Content
      *
      * @return void
      */
-    public function create()
+    public function create(array $data): array
     {
-
+        return $data;
     }
 }

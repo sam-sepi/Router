@@ -176,11 +176,23 @@ class Request
      */
     public static function getSanitizedArrayParams(): array
     {
-        $params = self::getQueryParamsLikeArray();
-
-        foreach($params as $key => $value)
+        if(self::getMethod() == 'get')
         {
-            $params[$key] = filter_var($value, FILTER_SANITIZE_STRING);
+            $params = self::getQueryParamsLikeArray();
+
+            foreach($params as $key => $value)
+            {
+                $params[$key] = filter_var($value, FILTER_SANITIZE_STRING);
+            }
+        }
+        else if(self::getMethod() == 'post')
+        {
+            $params = self::getPostData();
+
+            foreach($params as $key => $value)
+            {
+                $params[$key] = filter_var($value, FILTER_SANITIZE_STRING);
+            }
         }
 
         return $params;
@@ -192,13 +204,13 @@ class Request
      * @param boolean $json
      * @return array
      */
-    public static function getPostData(bool $json = true): array
+    public static function getPostData(bool $json = false): array
     {
         $data = [];
 
         if($json)
         {
-            $rawdata = file_get_contents('php://input');
+            $rawdata = json_decode(file_get_contents('php://input'));
 
             $data = json_decode($rawdata, true);
         }
