@@ -6,8 +6,6 @@ use InvalidArgumentException;
 
 class Response
 {
-    public $methodsAllowed = ['get', 'post'];
-
     public function __construct(string $route, array $params)
     {
         $this->route = $route;
@@ -19,9 +17,9 @@ class Response
      *
      * @return boolean
      */
-    public function setMethodsAllowed(): bool
+    protected function setMethodsAllowed(): bool
     {
-        if(!in_array(Request::getMethod(), $this->methodsAllowed))
+        if(!in_array(Request::getMethod(), Config::METHODS_ALLOWED))
         {
             return false;
         }
@@ -55,7 +53,7 @@ class Response
      * @param string $path
      * @return void
      */
-    public function render(string $path, array $data)
+    protected function render(string $path, array $data)
     {
         if(file_exists($path))
         {
@@ -67,6 +65,6 @@ class Response
             
             return ob_get_clean();
         } 
-        else throw new InvalidArgumentException($path);
+        else throw new InvalidArgumentException('FILE NOT FOUND');
     }
 }

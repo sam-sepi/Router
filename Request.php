@@ -5,7 +5,7 @@ namespace Router;
 /** 
  *  @class      Request
  *  
- *  Management request
+ *  Request handle
  */
 class Request
 {
@@ -65,7 +65,7 @@ class Request
      * 
      * @return mixed
      */
-    public static function getUserAgent()
+    public static function getUserAgent(): string
     {
         return isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : ' ';
     }
@@ -171,6 +171,8 @@ class Request
 
     /**
      * getSanitizedArrayParams
+     * 
+     * TODO implements PUT and DELETE meth. eventually
      *
      * @return array
      */

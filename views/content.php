@@ -16,5 +16,5 @@ else if(Router\Request::getMethod() == 'post')
 
 <!DOCTYPE html>
 <html>
-    <h1><?php //echo $article['title']; ?></h1>
+    <h1><?php if(isset($article['title'])) echo $article['title']; ?></h1>
 </html>

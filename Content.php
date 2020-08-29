@@ -30,7 +30,8 @@ class Content
      * 
      * TODO method from POST request
      *
-     * @return void
+     * @param array $data
+     * @return array
      */
     public function create(array $data): array
     {

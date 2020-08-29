@@ -53,6 +53,8 @@ class Router
 
     /**
      * @fn setQueryParams
+     * 
+     * sanitize get or post params
      *
      * @return array
      */
