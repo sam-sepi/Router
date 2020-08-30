@@ -218,10 +218,7 @@ class Request
         }
         else
         {
-            foreach ($_POST as $key => $value) 
-            {
-                $data[$key] = filter_var($value, FILTER_SANITIZE_STRING);
-            }
+            $data = $_POST;
         }
 
         return $data;
@@ -229,6 +226,9 @@ class Request
 
     /**
      * @fn isAjax
+     * 
+     * if request post isAjax probably json arg. set true in
+     * self::getPostData($json)
      *
      * @return boolean
      */

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Class Content
+ * 
+ * example for Router
+ */
+
 namespace Router;
 
 class Content

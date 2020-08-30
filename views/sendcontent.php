@@ -1,8 +1,3 @@
-<?php
-
-
-?>
-
 <!DOCTYPE html>
 <html>
     <form method = "POST" action = "http://localhost/Router/index.php/article">

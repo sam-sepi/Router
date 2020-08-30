@@ -9,6 +9,7 @@ class Config
     const METHODS_ALLOWED = ['get', 'post']; //TO DO eventually PUT and DELETE meth.
     const ROUTES_ALLOWED = 
     [
-        'article' => 'Router/views/content.php'
+        'article' => 'Router/views/content.php',
+        'send' => 'Router/views/sendcontent.php' //post method
     ];
 }
