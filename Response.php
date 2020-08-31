@@ -4,27 +4,17 @@ namespace Router;
 
 use InvalidArgumentException;
 
+use Router\Session;
+
 class Response
 {
+    public $route;
+    public $params;
+
     public function __construct(string $route, array $params)
     {
         $this->route = $route;
         $this->params = $params;
-    }
-
-    /**
-     * @fn http methods allowed
-     *
-     * @return boolean
-     */
-    protected function setMethodsAllowed(): bool
-    {
-        if(!in_array(Request::getMethod(), Config::METHODS_ALLOWED))
-        {
-            return false;
-        }
-
-        return true;
     }
 
     /**
@@ -34,17 +24,7 @@ class Response
      */
     public function getContent()
     {
-        if($this->setMethodsAllowed() == false)
-        {
-            ob_start();
-                HttpStatus::getHttpHeader(405);
-                echo $this->render(Config::HOST . 'Router/views/405.html');
-            return ob_get_clean();
-        }
-        else
-        {
-            echo $this->render(Config::HOST . $this->route, $this->params);
-        }
+        echo $this->render(Config::HOST . Config::ROUTES_ALLOWED[$this->route][0], $this->params);
     }
 
     /**
@@ -59,8 +39,17 @@ class Response
         {
             ob_start();
             
-            HttpStatus::getHttpHeader(200);
-            
+            switch($this->route)
+            {
+                case '401':
+                    http_response_code(401);
+                break;
+                
+                case '405':
+                    http_response_code(405);
+                break;
+            }
+
             include $path;
             
             return ob_get_clean();

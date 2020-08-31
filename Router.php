@@ -2,6 +2,8 @@
 
 namespace Router;
 
+use Router\Session;
+
 class Router
 {
     /**
@@ -48,7 +50,7 @@ class Router
     {
         $routes = explode('/', $route['path']);
         array_shift($routes);
-        return (array_key_exists(end($routes), Config::ROUTES_ALLOWED)) ? Config::ROUTES_ALLOWED[end($routes)] : Config::MAIN_PAGE;
+        return (array_key_exists(end($routes), Config::ROUTES_ALLOWED)) ? end($routes) : 'index';
     }
 
     /**
