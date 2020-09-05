@@ -21,9 +21,12 @@ class Config
         '401' => ['Router/views/401.html', 0],
         '405' => ['Router/views/405.html', 0],
         'article' => ['Router/views/content.php', 0],
-        'send' => ['Router/views/sendcontent.php', 1] //post method
+        'send' => ['Router/views/send.html', 0] //post method
     ];
 
+    /**
+     * 
+     */
     const SESSION_PARAMS =
     [
         'cookie_httponly' => 1, 
