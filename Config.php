@@ -4,7 +4,7 @@ namespace Router;
 
 class Config
 {
-    const HOST = "/opt/lampp/htdocs/";
+    const HOST = "htpp://localhost/";
     const METHODS_ALLOWED = ['get', 'post']; //TO DO eventually PUT and DELETE meth.
 
     //roles
@@ -21,11 +21,11 @@ class Config
         '401' => ['Router/views/401.html', 0],
         '405' => ['Router/views/405.html', 0],
         'article' => ['Router/views/content.php', 0],
-        'send' => ['Router/views/send.html', 0] //post method
+        'send' => ['Router/views/send.html', 1] //post method
     ];
 
     /**
-     * 
+     * Session Params
      */
     const SESSION_PARAMS =
     [

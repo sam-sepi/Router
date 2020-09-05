@@ -23,11 +23,9 @@ class Content
      */
     public function read(array $data): array
     {
-        return $this->content = 
-        [
-            'id' => 1,
-            'title' => "First page",
-            'content' => "Original content"
+        return [
+            'id' => $data['id'],
+            'title' => $data['title'],
         ];
     }
 
