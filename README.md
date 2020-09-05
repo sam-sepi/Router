@@ -73,7 +73,8 @@ $router = new Router\Router(Router\Request::getParsedURL(), function($route, $pa
     //permission
     $session = new Router\Session;
 
-    if((Router\Config::ROUTES_ALLOWED[$route][1] > 0) && ($session->role < Router\Config::ROUTES_ALLOWED[$route][1]))
+    if((Router\Config::ROUTES_ALLOWED[$route][1] > 0) && 
+    ($session->role < Router\Config::ROUTES_ALLOWED[$route][1]))
     {
         $route = '401';
     }
