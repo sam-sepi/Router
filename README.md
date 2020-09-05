@@ -20,7 +20,7 @@ RewriteRule ^(.*)$ index.php/$1 [L]
 
 ```
 
-#### The **configuration parameters** are found in the **Config.php** file: the allowed http methods, the accessible routes, the permissions based on the role registered in the session.
+The **configuration parameters** are found in the **Config.php** file: the allowed http methods, the accessible routes, the permissions based on the role registered in the session.
 
 ```php
 class Config
@@ -56,7 +56,7 @@ class Config
 }
 ```
 
-#### **Router** in **index.php** file:
+**Router** in **index.php** file:
 
 ```php
 include('vendor/autoload.php');
@@ -85,7 +85,7 @@ $router = new Router\Router(Router\Request::getParsedURL(), function($route, $pa
 });
 ```
 
-#### Class Content for *content* example.
+Class **Content** for *content* example.
 
 # Author
 
