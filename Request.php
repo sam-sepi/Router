@@ -161,7 +161,7 @@ class Request
     {
         $params = [];
 
-        return (self::getQueryParams() != null) ? parse_str(self::getQueryParams(), $params) : $params
+        return (self::getQueryParams() != null) ? parse_str(self::getQueryParams(), $params) : $params;
     }
 
     /**
